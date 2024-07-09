@@ -40,11 +40,11 @@
         const growthRate = 2.6; // per second
 
         function updateCounter() {
-            const currentTime = new Date().getTime();
+            const currentTime = Date.now();
             const elapsedSeconds = (currentTime - startDate) / 1000;
             const currentPopulation = Math.floor(startPopulation + (elapsedSeconds * growthRate));
             
-            document.getElementById('counter').textContent = currentPopulation;
+            document.getElementById('counter').textContent = currentPopulation.toLocaleString();
             requestAnimationFrame(updateCounter);
         }
 
