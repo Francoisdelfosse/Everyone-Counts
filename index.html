@@ -14,30 +14,26 @@
             justify-content: center;
             align-items: center;
             background-color: #000;
+            cursor: pointer;
         }
-        #counter-link {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            text-decoration: none;
-        }
-        #counter {
+        #counter, #message {
             font-family: 'Bebas Neue', sans-serif;
             color: #fff;
             text-align: center;
             width: 100%;
             font-size: 12vw;
             line-height: 1;
+            position: absolute;
+            transition: opacity 0.2s;
+        }
+        #message {
+            opacity: 0;
         }
     </style>
 </head>
-<body>
-    <a id="counter-link" href="https://www.francoisdelfosse.eu/selectedwork/world-population" target="_blank">
-        <div id="counter"></div>
-    </a>
-
+<body onclick="window.open('https://www.francoisdelfosse.eu/selectedwork/world-population', '_blank')">
+    <div id="counter"></div>
+    <div id="message">Everyone Counts</div>
     <script>
         const startPopulation = 8117413380;
         const startDate = new Date('2024-06-23T00:00:00Z').getTime();
@@ -52,7 +48,27 @@
             requestAnimationFrame(updateCounter);
         }
 
+        function flashMessage() {
+            const counter = document.getElementById('counter');
+            const message = document.getElementById('message');
+            counter.style.opacity = '0';
+            message.style.opacity = '1';
+            setTimeout(() => {
+                message.style.opacity = '0';
+                counter.style.opacity = '1';
+            }, 200);
+        }
+
+        function scheduleNextFlash() {
+            const delay = Math.floor(Math.random() * 5000) + 5000; // Random delay between 5 to 10 seconds
+            setTimeout(() => {
+                flashMessage();
+                scheduleNextFlash();
+            }, delay);
+        }
+
         updateCounter();
+        setTimeout(scheduleNextFlash, 5000); // Start the flashing after 5 seconds
     </script>
 </body>
 </html>
