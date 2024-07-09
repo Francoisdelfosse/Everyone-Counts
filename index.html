@@ -24,7 +24,7 @@
             font-size: 12vw;
             line-height: 1;
             position: absolute;
-            transition: opacity 0.2s;
+            transition: opacity 0.15s;
         }
         #message {
             opacity: 0;
@@ -44,7 +44,7 @@
             const elapsedSeconds = (currentTime - startDate) / 1000;
             const currentPopulation = Math.floor(startPopulation + (elapsedSeconds * growthRate));
             
-            document.getElementById('counter').textContent = currentPopulation.toLocaleString();
+            document.getElementById('counter').textContent = currentPopulation;
             requestAnimationFrame(updateCounter);
         }
 
@@ -56,7 +56,7 @@
             setTimeout(() => {
                 message.style.opacity = '0';
                 counter.style.opacity = '1';
-            }, 200);
+            }, 150); // Changed to 150ms (0.15 seconds)
         }
 
         function scheduleNextFlash() {
